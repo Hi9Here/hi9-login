@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../firebase-element/firebase-auth.html">
+
+<dom-module id="hi9-login">
+  <template>
+    <firebase-auth id="firebaseLogin"
+      user="{{user}}"
+      location="https://my-project.firebaseio.com"
+      provider="facebook"
+      on-error="_errorHandler"
+      on-login="_loginHandler"></firebase-auth>
+
+    <button on-tap="login">Login with facebook</button>
+    <button on-tap="logout">Logout</button>
+  </template>
+</dom-module>
+<script>
+Polymer({
+  is: 'hi9-login',
+  properties: {
+    successRedirect: String
+  },
+  _errorHandler: function(e){
+    console.log(e.detail);
+  },
+  _loginHandler: function(e){
+    if(this.successRedirect){
+      // How can I tell pagejs to redirect me ?
+      app.route = this.successRedirect;
+    }
+  }
+});
+</script>
