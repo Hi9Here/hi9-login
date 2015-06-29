@@ -12,14 +12,7 @@
     
     <paper-button on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}">Logout</paper-button>
     <paper-button on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}" >Login</paper-button>
-  <template is="dom-if" if="{{computeLogoutHidden(statusKnown, user)}}">
-   <paper-dialog modal>
-      <p> This is your first time at HI9 please login to use the site.  </p>
-      <div class="buttons"> 
-        <paper-button on-tap="login" dialog-confirm >Login</paper-button>
-      </div>
-    </paper-dialog>
-  </template>
+
 </template>
 </dom-module>
 <script>
@@ -48,6 +41,11 @@
       },
       statusKnown: {
         type: Boolean
+      },
+      show_model {
+        type: Boolean,
+        notify: true,
+        computed: "computeLogoutHidden(statusKnown, user)"
       }
     },
     login: function() {
