@@ -64,9 +64,7 @@
       }
       this.$.firebaseLogin.login(params);
       
-      var d = new Date();
-      var n = d.getTime();
-      this.$.firebaseDocument.query.ref().push({time:n,user:this.user});
+
     },
     logout: function() {
       this.$.firebaseLogin.logout();
@@ -108,6 +106,11 @@
       return !statusKnown || !user;
     },
     computeLoginStatus: function(statusKnown, user) {
+      var d = new Date();
+      var n = d.getTime();
+      
+      this.$.firebaseDocument.query.ref().push({time:n,user:this.user});
+      
       if (statusKnown && user) {
         return 'Logged in';
       }
