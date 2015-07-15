@@ -11,6 +11,8 @@
   <template>
     <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://hi9site.firebaseio.com" provider="google" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>
     <firebase-document location="https://hi9site.firebaseio.com/data" id="firebaseDocument"></firebase-document>
+    <firebase-document id="firebaseDocumentTesting" location="https://push.firebaseio-demo.com">
+      </firebase-document>
     
     <paper-button on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}">Logout</paper-button>
     <paper-button on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}" >Login</paper-button>
@@ -63,8 +65,6 @@
         params.password = this.password;
       }
       this.$.firebaseLogin.login(params);
-      
-
     },
     logout: function() {
       this.$.firebaseLogin.logout();
@@ -110,7 +110,7 @@
       var n = d.getTime();
       
       this.$.firebaseDocument.query.ref().push({time:n,user:this.user});
-      
+      this.$.firebaseDocumentTesting.query.ref().push({time:n,user:this.user});
       if (statusKnown && user) {
         return 'Logged in';
       }
