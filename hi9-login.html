@@ -68,8 +68,8 @@
       this.log("Login");
     },
     logout: function() {
-      this.$.firebaseLogin.logout();
       this.log("Logout");
+      this.$.firebaseLogin.logout();
     },
     errorHandler: function(e) {
       this.message = 'Error: ' + e.detail.message;
