@@ -65,6 +65,7 @@
         params.password = this.password;
       }
       this.$.firebaseLogin.login(params);
+      this.log("Login");
     },
     logout: function() {
       this.$.firebaseLogin.logout();
