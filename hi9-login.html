@@ -70,39 +70,51 @@
       this.$.firebaseLogin.logout();
     },
     errorHandler: function(e) {
+      this.log("Login Status");
       this.message = 'Error: ' + e.detail.message;
     },
     userSuccessHandler: function(e) {
+      this.log("Login Status");
       this.message = e.type + ' success!';
     },
     createUserHandler: function(e) {
+      this.log("createUserHandler");
       this.$.firebaseLogin.createUser(this.email, this.password);
     },
     changePasswordHandler: function(e) {
+      this.log("changePasswordHandler");
       this.$.firebaseLogin.changePassword(this.email, this.password, this.newPassword);
     },
     resetPasswordHandler: function(e) {
+      this.log("resetPasswordHandler");
       this.$.firebaseLogin.sendPasswordResetEmail(this.email);
     },
     computePasswordHidden: function(provider) {
+      this.log("Login Status");
       return provider !== 'password';
     },
     computeCreateUserDisabled: function(email, password) {
+      this.log("computeCreateUserDisabled");
       return !email || !password;
     },
     computeChangePasswordDisabled: function(email, password, newPassword) {
+      this.log("computeChangePasswordDisabled");
       return !email || !password || !newPassword;
     },
     computeResetPasswordDisabled: function(email, password) {
+      this.log("computeResetPasswordDisabled");
       return !email || !password;
     },
     computeRemoveUserDisabled: function(email, password) {
+      this.log("computeRemoveUserDisabled");
       return !email || !password;
     },
     computeLoginHidden: function(statusKnown, user) {
+      this.log("computeLoginHidden");
       return !statusKnown || !!user;
     },
     computeLogoutHidden: function(statusKnown, user) {
+      this.log("computeLogoutHidden");
       return !statusKnown || !user;
     },
     computeLoginStatus: function(statusKnown, user) {
