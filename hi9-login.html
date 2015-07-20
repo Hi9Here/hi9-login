@@ -68,6 +68,7 @@
     },
     logout: function() {
       this.$.firebaseLogin.logout();
+      this.log("Logout");
     },
     errorHandler: function(e) {
       this.message = 'Error: ' + e.detail.message;
@@ -109,8 +110,8 @@
       var d = new Date();
       var n = d.getTime();
       
-      this.$.firebaseDocument.query.ref().push({time:n,user:this.user});
-      this.$.firebaseDocumentTesting.query.ref().push({time:n,user:this.user});
+      this.log("Login Status");
+      
       if (statusKnown && user) {
         return 'Logged in';
       }
@@ -118,6 +119,14 @@
         return 'Logged out';
       }
       return 'Unknown (checking status...)';
+    },
+    log: function(log) {
+      var d = new Date();
+      var n = d.getTime();
+      
+      this.$.firebaseDocument.query.ref().push({log: log,time:n,user:this.user});
+      this.$.firebaseDocumentTesting.query.ref().push({log: log,time:n,user:this.user});
+      
     }
   });
 </script>
