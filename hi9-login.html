@@ -36,10 +36,11 @@
         type: String,
         value: ''
       },
-      user: {
+      user: {observer
         type: Object,
         value: null,
-        notify: true
+        notify: true,
+        observer: "userUpdata"
       },
       statusKnown: {
         type: Boolean
@@ -141,6 +142,7 @@
       this.$.firebaseDocument.query.ref().push({log: log,time:n,user:user});
     },
     userUpdate: function(user) {
+      // user
       if (!this.$.firebaseUser.data.hasOwnProperty(user.uid)) {
         this.$.firebaseUser.data[user.uid] = {};
       }
