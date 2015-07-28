@@ -143,11 +143,11 @@
       
       if (userData !== null && user !== null) {
         // user
-        if (!userData.data.hasOwnProperty(user.uid)) {
-          this.$.firebaseUser.data[user.uid] = {};
+        if (!userData.hasOwnProperty(user.uid)) {
+          userData[user.uid] = {};
         }
-        if (!this.$.firebaseUser.data[user.uid].hasOwnProperty("role")) {
-          this.$.firebaseUser.data[user.uid].role = "User"
+        if (!userData[user.uid].hasOwnProperty("role")) {
+          userData[user.uid].role = "User"
         }
         this.role = this.$.firebaseUser.data[user.uid].role;
       }
