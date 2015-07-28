@@ -141,7 +141,7 @@
       var user = this.user;
       var userData = this.userData;
       
-      if (userData !== null && user !== null) {
+      if (userData !== undefined && user !== null) {
         // user
         if (!userData.data.hasOwnProperty(user.uid)) {
           this.$.firebaseUser.data[user.uid] = {};
