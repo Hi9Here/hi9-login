@@ -28,7 +28,7 @@
       },
       userData: {
         type: Object, value: null
-      }
+      },
       email: {
         type: String, value: ''
       },
@@ -141,7 +141,7 @@
       var user = this.user;
       var userData = this.userData;
       
-      if (userData !== undefined && user !== null) {
+      if (userData !== null && user !== null) {
         // user
         if (!userData.data.hasOwnProperty(user.uid)) {
           this.$.firebaseUser.data[user.uid] = {};
