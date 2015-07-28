@@ -7,7 +7,7 @@
   <template>
     <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://hi9site.firebaseio.com" provider="google" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>
     <firebase-document location="https://hi9site.firebaseio.com/data" id="firebaseDocument"></firebase-document>
-    <firebase-document location="https://hi9site.firebaseio.com/users" id="firebaseUser"></firebase-document>
+    <firebase-document location="https://hi9site.firebaseio.com/users" data="{{userData}}" id="firebaseUser"></firebase-document>
     <paper-button on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}">Logout</paper-button>
     <paper-button on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}" >Login</paper-button>
 
@@ -141,15 +141,20 @@
       var user = this.user;
       this.$.firebaseDocument.query.ref().push({log: log,time:n,user:user});
     },
-    userUpdate: function(user) {
-      // user
-      if (!this.$.firebaseUser.data.hasOwnProperty(user.uid)) {
-        this.$.firebaseUser.data[user.uid] = {};
+    userUpdate: function() {
+      var user = this.user;
+      var userData = this.userData;
+      
+      if (userData !== null && user !== null) {
+        // user
+        if (!userData.data.hasOwnProperty(user.uid)) {
+          this.$.firebaseUser.data[user.uid] = {};
+        }
+        if (!this.$.firebaseUser.data[user.uid].hasOwnProperty("role")) {
+          this.$.firebaseUser.data[user.uid].role = "User"
+        }
+        this.role = this.$.firebaseUser.data[user.uid].role;
       }
-      if (!this.$.firebaseUser.data[user.uid].hasOwnProperty("role")) {
-        this.$.firebaseUser.data[user.uid].role = "User"
-      }
-      this.role = this.$.firebaseUser.data[user.uid].role;
     },
   });
 </script>
