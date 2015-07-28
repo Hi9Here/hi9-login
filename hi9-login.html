@@ -140,7 +140,7 @@
       var user = this.user;
       var userData = this.userData;
       
-      if (userData !== null && userData !== undefined && user !== undefined && user !== null) {
+      if (userData !== null || userData !== undefined && user !== undefined || user !== null) {
         // user
         if (!userData.hasOwnProperty(user.uid)) {
           userData[user.uid] = {};
