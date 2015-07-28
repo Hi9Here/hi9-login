@@ -140,15 +140,16 @@
       var user = this.user;
       var userData = this.userData;
       
-      if (userData !== null || userData !== undefined && user !== undefined || user !== null) {
+      if ((userData !== null || userData !== undefined) && (user !== undefined || user !== null)) {
         // user
+        
         if (!userData.hasOwnProperty(user.uid)) {
           userData[user.uid] = {};
         }
         if (!userData[user.uid].hasOwnProperty("role")) {
           userData[user.uid].role = "User"
         }
-        this.role = this.$.firebaseUser.data[user.uid].role;
+        this.role = userData.data[user.uid].role;
       }
     },
   });
