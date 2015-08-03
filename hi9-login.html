@@ -25,9 +25,6 @@
       message: {
         type: String, value: ''
       },
-      userData: {
-        observer: "userUpdate"
-      },
       email: {
         type: String, value: ''
       },
@@ -36,7 +33,7 @@
       },
       user: {
         type: Object, value: null,
-        notify: true, observer: "userUpdate"
+        notify: true
       },
       userDataUrl:{
         computed:'getUserDataUrl(user)'
@@ -49,11 +46,15 @@
         computed: "computeLogoutHidden(statusKnown, user)"
       },
       role: {
-        type: String, notify: true
+        computed: 'getRole(user)'
       }
     },
     getUserDataUrl: function(user) {
-      return "https://hi9site.firebaseio.com/users/" + user.uid;
+      if (user !== null && user.hasOwnProperty('uid')) {
+        return "https://hi9site.firebaseio.com/users/" + user.uid;
+      } else {
+        return null;
+      }
     },
     login: function() {
       var params;
@@ -142,20 +143,16 @@
       var user = this.user;
       this.$.firebaseDocument.query.ref().push({log: log,time:n,user:user});
     },
-    userUpdate: function() {
-      var user = this.user;
-      var userData = this.userData;
-      
-      if (userData !== undefined && user !== null) {
+    getRole: function(user) {
+      if (userData !== undefined && userData !== null && user !== null) {
         // user
-        if (!userData.hasOwnProperty(user.uid)) {
-          userData[user.uid] = {};
+        if (!userData.hasOwnProperty("role")) {
+          userData.role = "User"
         }
-        if (!userData[user.uid].hasOwnProperty("role")) {
-          userData[user.uid].role = "User"
-        }
-        this.role = userData.data[user.uid].role;
+        return userData.data.role;
+      } else {
+        return 'no data'
       }
-    },
+    }
   });
 </script>
