@@ -46,7 +46,12 @@
         computed: "computeLogoutHidden(statusKnown, user)"
       },
       role: {
-        computed: 'getRole(user,userData)'
+        computed: 'getRole(user,userData)',
+        notify: true
+      },
+      admin: {
+        computed: 'isAdmin(role)',
+        notify: true
       }
     },
     getUserDataUrl: function(user) {
@@ -153,6 +158,9 @@
       } else {
         return 'no data'
       }
+    },
+    isAdmin: function(role) {
+      return role = 'admin';
     }
   });
 </script>
