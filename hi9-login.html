@@ -46,7 +46,7 @@
         computed: "computeLogoutHidden(statusKnown, user)"
       },
       role: {
-        computed: 'getRole(user)'
+        computed: 'getRole(user,userData)'
       }
     },
     getUserDataUrl: function(user) {
@@ -143,13 +143,13 @@
       var user = this.user;
       this.$.firebaseDocument.query.ref().push({log: log,time:n,user:user});
     },
-    getRole: function(user) {
+    getRole: function(user, userData) {
       if (userData !== undefined && userData !== null && user !== null) {
         // user
         if (!userData.hasOwnProperty("role")) {
           userData.role = "User"
         }
-        return userData.data.role;
+        return userData.role;
       } else {
         return 'no data'
       }
