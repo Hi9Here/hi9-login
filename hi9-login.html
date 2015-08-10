@@ -146,10 +146,10 @@
       var d = new Date();
       var n = d.getTime();
       var user = this.user;
-      if (!userData.hasOwnProperty("log")) {
+      if (!this.userData.hasOwnProperty("log")) {
         this.userData.log = {};
       }
-      if (!userData.hasOwnProperty("user")) {
+      if (!this.userData.hasOwnProperty("user")) {
         this.userData.user = {};
       }
       
