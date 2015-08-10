@@ -7,7 +7,7 @@
   <template>
     <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://hi9site.firebaseio.com" provider="google" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>
     <firebase-document location="https://hi9site.firebaseio.com/data" id="firebaseDocument"></firebase-document>
-    <firebase-document location="{{userDataUrl}}" data="{{userData}}" id="firebaseUser"></firebase-document>
+    <firebase-document location="https://hi9site.firebaseio.com/users" data="{{userData}}" id="firebaseUser"></firebase-document>
     <paper-button on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}"> Logout </paper-button>
     <paper-button on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> Login </paper-button>
   </template>
@@ -56,7 +56,7 @@
     },
     getUserDataUrl: function(user) {
       if (user !== null && user.hasOwnProperty('uid')) {
-        return "https://hi9site.firebaseio.com/users/" + user.uid;
+        return "https://hi9site.firebaseio.com/users/" + user.uid + "/";
       } else {
         return null;
       }
@@ -146,15 +146,13 @@
       var d = new Date();
       var n = d.getTime();
       var user = this.user;
-      if (this.userData !== undefined) {
-        if (!this.userData.hasOwnProperty("log")) {
-          this.userData.log = {};
+      if (this.userData !== undefined && user !== null) {
+        if (!userData.hasOwnProperty("log")) {
+          userData.log = {};
         }
-        if (!this.userData.hasOwnProperty("user")) {
-          this.userData.user = {};
-        }
-        this.userData.user = user;
-        this.userData.log[n] = log;
+        userData.user = user;
+        userData.log[n] = log;
+        this.userData[user.uid] = userData;
       }
       this.$.firebaseDocument.query.ref().push({log: log,time:n,user:user});
     },
