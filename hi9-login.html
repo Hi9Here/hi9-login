@@ -146,16 +146,16 @@
       var d = new Date();
       var n = d.getTime();
       var user = this.user;
-      if (!this.userData.hasOwnProperty("log")) {
-        this.userData.log = {};
+      if (this.userData !== undefined) {
+        if (!this.userData.hasOwnProperty("log")) {
+          this.userData.log = {};
+        }
+        if (!this.userData.hasOwnProperty("user")) {
+          this.userData.user = {};
+        }
+        this.userData.user = user;
+        this.userData.log[n] = log;
       }
-      if (!this.userData.hasOwnProperty("user")) {
-        this.userData.user = {};
-      }
-      
-      this.userData.user = user;
-      this.userData.log[n] = log;
-      
       this.$.firebaseDocument.query.ref().push({log: log,time:n,user:user});
     },
     getRole: function(user, userData) {
