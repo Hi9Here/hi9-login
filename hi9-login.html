@@ -145,17 +145,7 @@
     log: function(log) {
       var d = new Date();
       var n = d.getTime();
-      if (this.userData !== undefined && this.userData !== null && this.user.hasOwnProperty("uid")) {
-        var user = this.user;
-        if (this.userData === undefined) {
-          this.userData = {};
-        }
-        if (!this.userData.hasOwnProperty("log")) {
-          this.userData.log = {};
-        }
-        this.userData.user = user;
-        this.userData.log[n] = log;
-      }     
+
       this.$.firebaseDocument.query.ref().push({log: log,time:n,user:user});
     },
     getRole: function(user, userData) {
