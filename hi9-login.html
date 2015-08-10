@@ -146,7 +146,7 @@
       var d = new Date();
       var n = d.getTime();
 
-      this.$.firebaseDocument.query.ref().push({log: log,time:n,user:user});
+      this.$.firebaseDocument.query.ref().push({log: log,time:n,user:this.user});
     },
     getRole: function(user, userData) {
       if (userData !== undefined && userData !== null && user !== null) {
