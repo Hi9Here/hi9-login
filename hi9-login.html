@@ -145,7 +145,7 @@
     log: function(log) {
       var d = new Date();
       var n = d.getTime();
-      if (this.user.hasOwnProperty("uid")) {
+      if (this.userData !== undefined && this.userData !== null && this.user.hasOwnProperty("uid")) {
         var user = this.user;
         if (this.userData === undefined) {
           this.userData = {};
