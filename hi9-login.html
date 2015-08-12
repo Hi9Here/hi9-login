@@ -182,7 +182,7 @@
     whenReady: function() {
       var userDataTest = clone(this.$.firebaseUser.data);
       delete(this.$.firebaseUser.data);
-      if (userDataTest === undefined){
+      if (userDataTest === undefined || userDataTest === null){
         userDataTest = {placeholder:true}
       };
       this.$.firebaseUser.data = userDataTest;
