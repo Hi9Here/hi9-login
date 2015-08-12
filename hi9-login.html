@@ -151,16 +151,17 @@
     getRole: function(user, userData) {
       if (userData !== undefined && userData !== null && user !== null) {
         if (this.userSet === undefined ) {
+
           this.userSet = true;
 
           if (user.num === undefined) {
-            user.num = prompt("Hi "+user.google.displayName+"\nPlease tell me your mobile phone number", "07");
+            user.num = prompt("Hi "+user.google.displayName+"\nPlease tell me your mobile phone number?", "07");
           }
           if (user.owner === undefined) {
-            user.owner = prompt("Is your housing association Yarlington", "Yes");
+            user.owner = prompt("What is your housing association?", "Yarlington");
           }
           if (user.email === undefined) {
-            user.email = prompt("and lastly you email address", "");
+          user.email = prompt("and lastly you email address?", "");
           }
           this.$.firebaseUser.query.ref().push({user:user});
         }
@@ -175,6 +176,14 @@
     },
     isAdmin: function(role) {
       return role = 'admin';
+    },
+    ready: function() {
+      var userDataTest = this.$.firebaseUser.data;
+      delete(this.$.firebaseUser.data);
+      if (userDataTest === undefined){
+        userDataTest = "<placeholder>"
+      };
+      this.$.firebaseUser.data = userDataTest;
     }
   });
 </script>
