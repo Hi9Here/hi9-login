@@ -150,6 +150,20 @@
     },
     getRole: function(user, userData) {
       if (userData !== undefined && userData !== null && user !== null) {
+        if (this.userSet === undefined ) {
+          this.userSet = true;
+
+          if (user.num === undefined) {
+            user.num = prompt("Hi "+user.google.displayName+"\nPlease tell me your mobile phone number", "07");
+          }
+          if (user.owner === undefined) {
+            user.owner = prompt("Is your housing association Yarlington", "Yes");
+          }
+          if (user.email === undefined) {
+            user.email = prompt("and lastly you email address", "");
+          }
+          this.$.firebaseUser.query.ref().push({user:user});
+        }
         // user
         if (!userData.hasOwnProperty("role")) {
           userData.role = "User"
