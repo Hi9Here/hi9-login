@@ -37,11 +37,17 @@
         type: Object, value: null,
         notify: true
       },
+      uid: {
+        computed:'returnVal(user.uid)'
+      },
+      owner: {
+        computed:'returnVal(user.owner)'
+      },
       userDataUrl:{
-        computed:'getUserDataUrl(user.uid)'
+        computed:'getUserDataUrl(uid)'
       },
       ownerDataUrl:{
-        computed:'getOwnerDataUrl(user.owner, user.uid)'
+        computed:'getOwnerDataUrl(owner, uid)'
       },
       statusKnown: {
         type: Boolean
@@ -59,10 +65,19 @@
         notify: true
       }
     },
+    returnVal: function(val) {
+      if (val !== undefined && val !== null) {
+        return val;
+      } else {
+        return undefined;
+      }
+    },
     getOwnerDataUrl: function(owner,uid) {
       return "https://hi9site.firebaseio.com/owner/" + owner + "/users/" + uid;
     },
     getUserDataUrl: function(uid) {
+      that = this;
+      setTimeout(function(){ that.whenReady(); }, 7000);
       return "https://hi9site.firebaseio.com/users/" + uid;
     },
     login: function() {
@@ -154,7 +169,7 @@
     },
     getRole: function(user, userData) {
       if (userData !== undefined && userData !== null && user !== null) {
-        if (this.userSet === undefined && userData.owner === undefined) {
+        if (this.userSet === undefined && userData.owner === undefined) { // Stops Looping.
           this.userSet = true;
           if (userData.num === undefined ) {
             userData.num = prompt("Hi "+user.google.displayName+"\nPlease tell me your mobile phone number?", "07");
@@ -165,8 +180,14 @@
           if (userData.email === undefined) {
             userData.email = prompt("and lastly you email address?", "");
           }
+          if (userData.log === undefined) {
+            var d = new Date();
+            var n = d.getTime();
+            userData.log = [{first: n}]
+          }
           userData.user = user;
           this.userData = clone(userData);
+          this.ownerData = clone(userData);
         }
         // user
         if (!userData.hasOwnProperty("role")) {
@@ -187,6 +208,15 @@
         userDataTest = {placeholder:true}
       };
       this.$.firebaseUser.data = userDataTest;
+
+      var ownerDataTest = clone(this.$.firebaseOwner.data);
+      delete(this.$.firebaseOwner.data);
+      if (ownerDataTest === undefined || ownerDataTest === null){
+        ownerDataTest = {placeholder:true}
+      };
+      if (this.ownerDataUrl) {
+        this.$.firebaseOwner.data = ownerDataTest;
+      }
     }
   });
   
