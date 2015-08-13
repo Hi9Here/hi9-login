@@ -8,6 +8,7 @@
     <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://hi9site.firebaseio.com" provider="google" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>
     <!--  <firebase-document location="https://hi9site.firebaseio.com/data" id="firebaseDocument"></firebase-document> -->
     <firebase-document location="{{userDataUrl}}" data="{{userData}}" id="firebaseUser"></firebase-document>
+    <firebase-document location="{{ownerDataUrl}}" data="{{ownerData}}" id="firebaseOwner"></firebase-document>
     <paper-button on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}"> Logout </paper-button>
     <paper-button on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> Login </paper-button>
   </template>
@@ -37,7 +38,10 @@
         notify: true
       },
       userDataUrl:{
-        computed:'getUserDataUrl(user)'
+        computed:'getUserDataUrl(user.uid)'
+      },
+      ownerDataUrl:{
+        computed:'getOwnerDataUrl(user.owner, user.uid)'
       },
       statusKnown: {
         type: Boolean
@@ -55,14 +59,11 @@
         notify: true
       }
     },
-    getUserDataUrl: function(user) {
-      if (user !== null && user.hasOwnProperty('uid')) {
-        that = this;
-        setTimeout(function(){ that.whenReady(); }, 7000);
-        return "https://hi9site.firebaseio.com/users/" + user.uid;
-      } else {
-        return null;
-      }
+    getOwnerDataUrl: function(owner,uid) {
+      return "https://hi9site.firebaseio.com/owner/" + owner + "/users/" + uid;
+    },
+    getUserDataUrl: function(uid) {
+      return "https://hi9site.firebaseio.com/users/" + uid;
     },
     login: function() {
       var params;
