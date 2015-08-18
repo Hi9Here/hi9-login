@@ -19,7 +19,8 @@
     is: 'hi9-login',
     properties: {
       params: {
-        scope: "email"
+        type: Object,
+        value: {scope: "email"}
       },
       provider: {
         type: String, value: 'anonymous'
@@ -92,6 +93,7 @@
         params.email = this.email;
         params.password = this.password;
       }
+      
       this.$.firebaseLogin.login(params);
       this.log("Login");
     },
