@@ -36,11 +36,11 @@
       password: {
         type: String, value: ''
       },
-      user: {
-        type: Object, value: null,
+      data: {
+        type: Object,
         notify: true
       },
-      userData: {
+      user: {
         type: Object, value: null,
         notify: true
       },
@@ -196,6 +196,7 @@
           userData.user = user;
           this.userData = clone(userData);
           this.ownerData = clone(userData);
+          this.data = userdata;
         }
         // user
         if (!userData.hasOwnProperty("role")) {
