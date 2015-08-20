@@ -196,7 +196,7 @@
           userData.user = user;
           this.userData = clone(userData);
           this.ownerData = clone(userData);
-          this.data = userData;
+          this.data = clone(userData);
         }
         // user
         if (!userData.hasOwnProperty("role")) {
