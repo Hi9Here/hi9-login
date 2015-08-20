@@ -36,9 +36,6 @@
       password: {
         type: String, value: ''
       },
-      data: {
-        type: Object,notify: true, observer: "dataChanged"
-      },
       user: {
         type: Object, value: null,
         notify: true
@@ -48,6 +45,9 @@
       },
       owner: {
         computed:'returnVal(user.owner)'
+      },
+      userData:{
+        type: Object, notify: true
       },
       userDataUrl:{
         computed:'getUserDataUrl(uid)'
@@ -199,8 +199,7 @@
           }
           userData.user = user;
           this.userData = clone(userData);
-          this.ownerData = clone(userData);
-          this.data = clone(userData);
+          //this.ownerData = clone(userData);
         }
         // user
         if (!userData.hasOwnProperty("role")) {
