@@ -37,8 +37,7 @@
         type: String, value: ''
       },
       data: {
-        type: Object,
-        notify: true
+        type: Object,notify: true, observer: "dataChanged"
       },
       user: {
         type: Object, value: null,
@@ -71,6 +70,9 @@
         computed: 'isAdmin(role)',
         notify: true
       }
+    },
+    dataChanged: function(data) {
+      this.userData = clone(data);
     },
     returnVal: function(val) {
       if (val !== undefined && val !== null) {
