@@ -202,6 +202,7 @@
         if (!userData.hasOwnProperty("role")) {
           userData.role = "User"
         }
+        this.data = userData;
         return userData.role;
       } else {
         return 'no data'
