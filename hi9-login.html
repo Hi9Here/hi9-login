@@ -208,23 +208,6 @@
     },
     isAdmin: function(role) {
       return role = 'admin';
-    },
-    whenReady: function() {
-      var userDataTest = clone(this.$.firebaseUser.data);
-      delete(this.$.firebaseUser.data);
-      if (userDataTest === undefined || userDataTest === null){
-        userDataTest = {placeholder:true}
-      };
-      this.$.firebaseUser.data = userDataTest;
-
-      var ownerDataTest = clone(this.$.firebaseOwner.data);
-      delete(this.$.firebaseOwner.data);
-      if (ownerDataTest === undefined || ownerDataTest === null){
-        ownerDataTest = {placeholder:true}
-      };
-      if (this.ownerDataUrl) {
-        this.$.firebaseOwner.data = ownerDataTest;
-      }
     }
   });
   
