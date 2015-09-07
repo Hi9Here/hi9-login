@@ -186,6 +186,11 @@
         return 'no data'
       }
     },
+    getUserDataUrl: function(uid) {
+      that = this;
+      setTimeout(function(){ that.whenReady(); }, 7000);
+      return "https://hi9site.firebaseio.com/users/" + uid;
+    },
     isAdmin: function(role) {
       return role = 'admin';
     }
