@@ -187,8 +187,6 @@
       }
     },
     getUserDataUrl: function(uid) {
-      that = this;
-      setTimeout(function(){ that.whenReady(); }, 7000);
       return "https://hi9site.firebaseio.com/users/" + uid;
     },
     isAdmin: function(role) {
