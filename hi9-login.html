@@ -101,6 +101,7 @@
     logout: function () {
       this.log('Logout')
       this.$.firebaseLogin.logout()
+      location.reload()
     },
     errorHandler: function (e) {
       this.log('Login Status')
