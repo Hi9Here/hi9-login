@@ -12,7 +12,7 @@
     <firebase-document location="https://hi9site.firebaseio.com/data" id="firebaseDocument"></firebase-document>
     
     <paper-button raised on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}"> Logout </paper-button>
-    <paper-button raised on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> {{login}} </paper-button>
+    <paper-button raised on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> {{loginText}} </paper-button>
   </template>
 </dom-module>
 <script>
@@ -25,7 +25,7 @@
         type: Object,
         value: {scope: 'email'}
       },
-      login :{
+      loginText :{
         value:"Login"
       },
       provider: {
