@@ -96,11 +96,6 @@
 
       this.$.firebaseLogin.login(params)
       this.log('Login')
-      if (window.location.hash === "#!/#?") {
-        window.location.href = "/"
-      } else {
-        window.location.hash = ""
-      }
     },
     logout: function () {
       this.log('Logout')
