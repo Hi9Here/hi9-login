@@ -17,8 +17,6 @@
 </dom-module>
 <script>
 
-reload_onlogin = function(event) {if (window.location.hash === "") {window.location.href = "/#!";location.reload()}}
-
 (function () {
   'use strict'
   Polymer({
@@ -101,7 +99,7 @@ reload_onlogin = function(event) {if (window.location.hash === "") {window.locat
       this.$.firebaseLogin.login(params)
       this.log('Login')
       if (window.location.hash !== "#!") {
-        window.addEventListener("focus", reload_onlogin, false)
+        window.addEventListener("focus", function(event) {if (window.location.hash === "") {window.location.href = "/#!";location.reload()}}, false)
       } else {
         window.location.hash = ""
       }
