@@ -98,7 +98,7 @@
       this.$.firebaseLogin.login(params)
       this.log('Login')
       if (window.location.hash !== "#!") {
-        setTimeout('window.location.href = "/#!"',3500)
+        setTimeout('window.location.href = "/#!";location.reload()',350)
       } else {
         window.location.hash = ""
       }
