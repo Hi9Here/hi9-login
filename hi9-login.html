@@ -97,7 +97,7 @@
       this.$.firebaseLogin.login(params)
       this.log('Login')
       if (window.location.hash === "#!/#?") {
-        window.addEventListener("focus", function(e) {window.location.href = "/#!"}, false)
+        window.location.href = "/"
       } else {
         window.location.hash = ""
       }
