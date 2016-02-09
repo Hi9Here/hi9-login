@@ -17,7 +17,7 @@
 </dom-module>
 <script>
 
-reload_onlogin = function(event) {if (window.location.hash !== "#!") {window.location.href = "/#!";location.reload()};window.removeEventListener("focus", reload_onlogin, false)}
+reload_onlogin = function(event) {if (window.location.hash !== "#!") {window.location.href = "/#!";location.reload();window.removeEventListener("focus", reload_onlogin, false)}}
 
 (function () {
   'use strict'
