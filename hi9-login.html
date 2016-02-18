@@ -45,23 +45,12 @@
         computed: 'returnVal(user.uid)',
         notify: true
       },
-      userData: {
-        type: Object, notify: true
-      },
       statusKnown: {
         type: Boolean
       },
       show_model: {
         type: Boolean, notify: true,
         computed: 'computeLogoutHidden(statusKnown, user)'
-      },
-      role: {
-        computed: 'getRole(user,userData)',
-        notify: true
-      },
-      admin: {
-        computed: 'isAdmin(role)',
-        notify: true
       }
     },
     returnVal: function (val) {
@@ -137,9 +126,6 @@
         return 'Logged out'
       }
       return 'Unknown (checking status...)'
-    },
-    getUserDataUrl: function (uid) {
-      return 'https://hi9site.firebaseio.com/users/' + uid
     },
     isAdmin: function (role) {
       return role === 'admin'
