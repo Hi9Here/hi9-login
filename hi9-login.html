@@ -42,16 +42,11 @@
         notify: true
       },
       uid: {
-        computed: 'returnVal(user.uid)'
-      },
-      owner: {
-        computed: 'returnVal(user.owner)'
+        computed: 'returnVal(user.uid)',
+        notify: true
       },
       userData: {
         type: Object, notify: true
-      },
-      ownerDataUrl: {
-        computed: 'getOwnerDataUrl(owner, uid)'
       },
       statusKnown: {
         type: Boolean
