@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../firebase-element/firebase-auth.html">
-<link rel="import" href="../mediator-data/mediator-data.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <!--
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
@@ -9,7 +8,6 @@
 <dom-module id="hi9-login">
   <template>
     <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://hi9site.firebaseio.com" provider="google" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
-    <mediator-data location="https://hi9site.firebaseio.com/users/" data="{{userData}}" folder="{{uid}}"></mediator-data>
     <paper-button raised on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}"> Logout </paper-button>
     <paper-button raised on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> {{loginText}} </paper-button>
   </template>
@@ -51,9 +49,6 @@
       },
       userData: {
         type: Object, notify: true
-      },
-      userDataUrl: {
-        computed: 'getUserDataUrl(uid)'
       },
       ownerDataUrl: {
         computed: 'getOwnerDataUrl(owner, uid)'
