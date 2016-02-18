@@ -90,16 +90,12 @@
       }
 
       this.$.firebaseLogin.login(params)
-      this.log('Login')
-      
     },
     logout: function () {
-      this.log('Logout')
       this.$.firebaseLogin.logout()
       window.location.href = "/"
     },
     errorHandler: function (e) {
-      this.log('Login Status')
       this.message = 'Error: ' + e.detail.message
     },
     userSuccessHandler: function (e) {
@@ -139,8 +135,6 @@
       var d = new Date()
       var n = d.getTime()
 
-      this.log('Login Status')
-
       if (statusKnown && user) {
         return 'Logged in'
       }
@@ -148,44 +142,6 @@
         return 'Logged out'
       }
       return 'Unknown (checking status...)'
-    },
-    log: function (log) {
-      var d = new Date()
-      var n = d.getTime()
-
-      // this.userData.log.push({log: log, time: n, user: this.user})
-    },
-    getRole: function (user, userData) {
-      if (userData !== undefined && userData !== null && user !== null) {
-        if (this.userSet === undefined && userData.owner === undefined) { // Stops Looping.
-          this.userSet = true
-          if (userData.num === undefined) {
-            // userData.num = prompt('Hi ' + user.google.displayName + '\nPlease tell me your mobile phone number?', '07')
-          }
-          if (userData.owner === undefined) {
-            // userData.owner = prompt('What is your housing association?', 'Yarlington')
-          }
-          if (userData.email === undefined) {
-            // userData.email = prompt('and lastly you email address?', '')
-          }
-          if (userData.log === undefined) {
-            var d = new Date()
-            var n = d.getTime()
-            userData.log = [{first: n}]
-          }
-          userData.user = user
-          this.userData = clone(userData)
-        // this.ownerData = clone(userData)
-        }
-        // user
-        if (!userData.hasOwnProperty('role')) {
-          userData.role = 'User'
-        }
-        this.data = userData
-        return userData.role
-      } else {
-        return 'no data'
-      }
     },
     getUserDataUrl: function (uid) {
       return 'https://hi9site.firebaseio.com/users/' + uid
