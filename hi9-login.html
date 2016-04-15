@@ -7,7 +7,7 @@
 -->
 <dom-module id="hi9-login">
   <template>
-    <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://hi9site.firebaseio.com" provider="google" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
+    <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="{{location}}" provider="google" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
     <paper-button raised on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}"> Logout </paper-button>
     <paper-button raised on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> {{loginText}} </paper-button>
   </template>
