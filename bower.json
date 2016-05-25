@@ -1,7 +1,7 @@
 {
   "name": "hi9-login",
   "version": "1.0.0",
-  "description": "give you a list of cards ",
+  "description": "login / logout",
   "main": "hi9-login.html",
   "keywords": [
     "polymer",
