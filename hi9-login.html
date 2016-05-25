@@ -78,7 +78,16 @@
     },
     handleSignIn: function (e) {
       console.log(e)
-      console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile())
+      var profile = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile())
+      var user = {
+        email: profile.getEmail(), 
+        familyName: profile.getFamilyName(), 
+        givenName: profile.getGivenName(), 
+        id: profile.getId(), 
+        imageUrl: profile.getImageUrl(), 
+        getName: profile.getName()
+        token: e.detail.access_token
+      }
     },
     createUserHandler: function (e) {
       this.$.firebaseLogin.createUser(this.email, this.password)
