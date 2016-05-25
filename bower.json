@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "polymer": "*",
-    "polymerfire": "firebase/polymerfire",
+    "google-signin": "GoogleWebComponents/google-signin",
     "paper-button": "PolymerElements/paper-button#~1.0.11"
   }
 }
