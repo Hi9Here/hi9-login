@@ -37,11 +37,7 @@
       password: {type: String, value: ''},
       user: {type: Object, value: null,notify: true},
       uid: {computed: 'returnVal(user.uid)',notify: true},
-      statusKnown: {type: Boolean},
-      show_model: {
-        type: Boolean, notify: true,
-        computed: 'computeLogoutHidden(statusKnown, user)'
-      }
+      statusKnown: {type: Boolean}
     },
     getLocationDomain: function (location) {
       return location.replace("https://","")
