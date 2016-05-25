@@ -68,11 +68,9 @@
         return undefined
       }
     },
-    login: function () {
-      this.$.aware.signOut()
-    },
+    login: function () {this.$.aware.signIn()},
     logout: function () {
-      this.$.aware.signIn()
+      this.$.aware.signOut()
       window.location.href = "/"
     },
     errorHandler: function (e) {
