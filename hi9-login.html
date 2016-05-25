@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../polymerfire/firebase-auth.html">
-<link rel="import" href="../polymerfire/firebase-app.html">
+<link rel="import" href="../google-signin/google-signin.html">
+<link rel="import" href="../google-signin/google-signin-aware.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <!--
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
@@ -15,7 +15,17 @@
     }
   </style>
   <template>
-    <firebase-auth id="firebaseLogin" signed-in="{{signedIn}}" user="{{_user}}" status-known="{{statusKnown}}" location="{{location}}" provider="{{provider}}" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
+    <google-signin-aware
+      scopes="{{scope}}"
+      openid-prompt="{{openidPromptValue}}"
+      signed-in="{{signedIn}}"
+      offline="{{offline}}"
+      is-authorized="{{isAuthorized}}"
+      need-additional-auth="{{needAdditionalAuth}}"
+      on-google-signin-aware-success="handleSignIn"
+      on-google-signin-offline-success="handleOffline"
+      on-google-signin-aware-signed-out="handleSignOut"></google-signin-aware>
+      
     <paper-button raised on-tap="logout" hidden$="{{!signedIn}}"> Logout </paper-button>
     <paper-button raised on-tap="login" hidden$="{{signedIn}}"> {{loginText}} </paper-button>
   </template>
