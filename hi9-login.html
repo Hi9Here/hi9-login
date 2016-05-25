@@ -16,7 +16,7 @@
   <template>
     <google-signin-aware id="aware"
       client-id="{{clientId}}"
-      scopes="profile"
+      scopes="profile https://www.googleapis.com/auth/firebase.database"
       openid-prompt="{{openidPromptValue}}"
       signed-in="{{signedIn}}"
       offline="{{offline}}"
