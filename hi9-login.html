@@ -79,7 +79,7 @@
     handleSignIn: function (e) {
       console.log(e)
       var profile = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile())
-      var user = {
+      this._user = {
         email: profile.getEmail(), 
         familyName: profile.getFamilyName(), 
         givenName: profile.getGivenName(), 
