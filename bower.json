@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "polymer": "*",
-    "firebase-element": "GoogleWebComponents/firebase-element#0b1f9b9508",
+    "polymerfire": "firebase/polymerfire",
     "paper-button": "PolymerElements/paper-button#~1.0.11"
   }
 }
