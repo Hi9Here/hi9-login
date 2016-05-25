@@ -86,7 +86,7 @@
       this.$.firebaseLogin.signInWithRedirect(provider)
     },
     logout: function () {
-      this.$.firebaseLogin.logout()
+      this.$.firebaseLogin.signOut()
       window.location.href = "/"
     },
     errorHandler: function (e) {
