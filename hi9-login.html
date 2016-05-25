@@ -16,7 +16,8 @@
   </style>
   <template>
     <google-signin-aware
-      scopes="{{scope}}"
+      id="aware"
+      scopes="profile"
       openid-prompt="{{openidPromptValue}}"
       signed-in="{{signedIn}}"
       offline="{{offline}}"
@@ -65,10 +66,10 @@
       }
     },
     login: function () {
-      this.$.firebaseLogin.signInWithRedirect(this.provider)
+      this.$.aware.signIn();
     },
     logout: function () {
-      this.$.firebaseLogin.signOut()
+      this.$.aware.signOut();
       window.location.href = "/"
     },
     errorHandler: function (e) {
