@@ -6,7 +6,7 @@
 @demo https://hi9.uk/
 -->
 <dom-module id="hi9-login">
-   <style>
+  <style>
     paper-button {
       background: var(--accent-color);
       color: var(--button-color);
@@ -14,7 +14,8 @@
     }
   </style>
   <template>
-    <firebase-auth id="firebaseLogin" api-key="{{apiKey}}" user="{{user}}"  status-known="{{statusKnown}}" location="{{location}}" provider="{{provider}}" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
+    <firebase-app auth-domain="{{location}}" database-url="{{location}}" api-key="{{apiKey}}"></firebase-app>
+    <firebase-auth id="firebaseLogin"  user="{{user}}"  status-known="{{statusKnown}}" location="{{location}}" provider="{{provider}}" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
     <paper-button raised on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}"> Logout </paper-button>
     <paper-button raised on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> {{loginText}} </paper-button>
   </template>
@@ -25,39 +26,16 @@
   Polymer({
     is: 'hi9-login',
     properties: {
-      params: {
-        type: Object,
-        value: {scope: 'email'}
-      },
-      location: {
-        type: String, value:"https://hi9site.firebaseio.com"
-      },
-      provider: {
-        type: String, value:"google"
-      },
-      loginText :{
-        value:"Login"
-      },
-      message: {
-        type: String, value: ''
-      },
-      email: {
-        type: String, value: ''
-      },
-      password: {
-        type: String, value: ''
-      },
-      user: {
-        type: Object, value: null,
-        notify: true
-      },
-      uid: {
-        computed: 'returnVal(user.uid)',
-        notify: true
-      },
-      statusKnown: {
-        type: Boolean
-      },
+      params: {type: Object,value: {scope: 'email'}},
+      location: {type: String, value:"https://hi9site.firebaseio.com"},
+      provider: {type: String, value:"google"},
+      loginText :{value:"Login"},
+      message: {type: String, value: ''},
+      email: {type: String, value: ''},
+      password: {type: String, value: ''},
+      user: {type: Object, value: null,notify: true},
+      uid: {computed: 'returnVal(user.uid)',notify: true},
+      statusKnown: {type: Boolean},
       show_model: {
         type: Boolean, notify: true,
         computed: 'computeLogoutHidden(statusKnown, user)'
@@ -71,18 +49,6 @@
       }
     },
     login: function () {
-      var params
-      try {
-        params = JSON.parse(this.params)
-      } catch (e) {
-        params = null
-      }
-      if (this.provider === 'password') {
-        params = params || {}
-        params.email = this.email
-        params.password = this.password
-      }
-
       this.$.firebaseLogin.signInWithRedirect(this.provider)
     },
     logout: function () {
