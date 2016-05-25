@@ -37,8 +37,8 @@
     is: 'hi9-login',
     properties: {
       params: {type: Object,value: {scope: 'email'}},
-      provider: {type: String, value:"google"},
-      loginText :{value:"Login"},
+      provider: {type: String, value: "google"},
+      loginText: {value: "Login"},
       message: {type: String, value: ''},
       email: {type: String, value: ''},
       password: {type: String, value: ''},
@@ -83,6 +83,7 @@
         email: profile.getEmail(), 
         familyName: profile.getFamilyName(), 
         givenName: profile.getGivenName(), 
+        displayName: profile.getGivenName() + " " + profile.getGivenName(),
         uid: "google:" + profile.getId(), 
         imageUrl: profile.getImageUrl(), 
         getName: profile.getName(),
