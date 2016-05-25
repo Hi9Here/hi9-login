@@ -26,7 +26,6 @@
       on-google-signin-offline-success="handleOffline"
       on-google-signin-aware-signed-out="handleSignOut">
     </google-signin-aware>
-        
     <paper-button raised on-tap="logout" hidden$="{{!signedIn}}"> Logout </paper-button>
     <paper-button raised on-tap="login" hidden$="{{signedIn}}"> {{loginText}} </paper-button>
   </template>
