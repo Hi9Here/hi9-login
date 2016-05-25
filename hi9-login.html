@@ -78,6 +78,7 @@
     },
     handleSignIn: function (e) {
       console.log(e)
+      console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile())
     },
     createUserHandler: function (e) {
       this.$.firebaseLogin.createUser(this.email, this.password)
