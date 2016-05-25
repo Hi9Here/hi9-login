@@ -83,7 +83,7 @@
         params.password = this.password
       }
 
-      this.$.firebaseLogin.signInWithRedirect(provider)
+      this.$.firebaseLogin.signInWithRedirect(this.provider)
     },
     logout: function () {
       this.$.firebaseLogin.signOut()
