@@ -14,7 +14,7 @@
     }
   </style>
   <template>
-    <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="{{location}}" provider="{{provider}}" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
+    <firebase-auth id="firebaseLogin" user="{{user}}"  status-known="{{statusKnown}}" location="{{location}}" provider="{{provider}}" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
     <paper-button raised on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}"> Logout </paper-button>
     <paper-button raised on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> {{loginText}} </paper-button>
   </template>
@@ -83,7 +83,7 @@
         params.password = this.password
       }
 
-      this.$.firebaseLogin.login(params)
+      this.$.firebaseLogin.signInWithRedirect(provider)
     },
     logout: function () {
       this.$.firebaseLogin.logout()
