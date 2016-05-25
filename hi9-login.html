@@ -15,6 +15,7 @@
     }
   </style>
   <template>
+    <firebase-app name="{{locationDomain}}" auth-domain="{{locationDomain}}" database-url="{{_url}}" api-key="{{apiKey}}"></firebase-app>
     <firebase-auth id="firebaseLogin" signed-in="{{signedIn}}" user="{{_user}}" status-known="{{statusKnown}}" location="{{location}}" provider="{{provider}}" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" params="{{params}}" on-user-removed="userSuccessHandler"></firebase-auth>
     <paper-button raised on-tap="logout" hidden$="{{!signedIn}}"> Logout </paper-button>
     <paper-button raised on-tap="login" hidden$="{{signedIn}}"> {{loginText}} </paper-button>
@@ -33,9 +34,16 @@
       email: {type: String, value: ''},
       password: {type: String, value: ''},
       user: {type: Object, value: null, computed: "getUser(_user, signedIn)", notify: true},
+      locationDomain: {type: Object, computed: "getLocationDomain(app)"},
       uid: {computed: 'returnVal(user.uid)',notify: true},
       signedIn: {type: Boolean, value: false},
       statusKnown: {type: Boolean}
+    },
+    getLocationDomain: function (app) {
+      return app+".firebaseapp.com"
+    },
+    get_url: function(app) {
+      return "https://"+app+".firebaseio.com"
     },
     getUser: function(_user, signedIn) {
       if (signedIn) {
@@ -43,9 +51,6 @@
       } else {
         return null
       }
-    },
-    getLocationDomain: function (location) {
-      return location.replace("https://","")
     },
     returnVal: function (val) {
       if (val !== undefined && val !== null) {
