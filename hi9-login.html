@@ -76,8 +76,8 @@
     errorHandler: function (e) {
       this.message = 'Error: ' + e.detail.message
     },
-    userSuccessHandler: function (e) {
-      this.message = e.type + ' success!'
+    handleSignIn: function (e) {
+      console.log(e)
     },
     createUserHandler: function (e) {
       this.$.firebaseLogin.createUser(this.email, this.password)
